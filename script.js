@@ -59,7 +59,42 @@ const creatTask = () => {
             <span class="fw-bolder">${ele.text}</span>
             <span class="fw-bolder">${ele.date}</span>
             <p class="fw-bold">${ele.task}</p>
+            <span class="options">
+            <i onclick="editTask(this)" data-bs-toggle="modal" data-bs-target="#form" class="fa-solid fa-square-pen fa-beat-fade" style="color: #FFD43B;"></i>
+            <i onclick="deleteTask(this)" class="fa-solid fa-trash-can fa-beat-fade" style="color: #FFD43B;"></i>
+            </span>
             </div>
-            `)
+            `
+          )
   })
+  resetform();
+}
+
+
+//!RESETTING THE FORM AFTER DISPLAYING THE TASK
+
+const resetform=()=>{
+  textInput.value="";
+  dateInput.value="";
+  textarea.value="";
+}
+(()=>{
+  data = JSON.parse(localStorage.getItem("data")) || [ ]
+  creatTask();
+}) ();
+
+//!edit task function for created TODOS
+
+const editTask = (e)=>{
+  let result = e.parentElement.parentElement;
+  textInput.value = result.children[0].innerHTML;
+  dateInput.value = result.children[1].innerHTML;
+  textarea.value = result.children[2].innerHTML;
+  deleteTask(e)
+}
+
+const deleteTask = (e)=>{
+  e.parentElement.parentElement.remove();
+  data.splice(e.parentElement.parentElement.id,1)
+  localStorage.setItem("data",JSON.stringify(data))
 }
