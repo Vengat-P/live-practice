@@ -41,9 +41,8 @@ body{
     color: #FFD43B;
     font-size: larger;
 }
-h1{
-    color: white;
-}
-h3{
-    color: white;
+
+#msg{
+    color: red;
+    margin-left: 16px;
 }
